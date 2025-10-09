@@ -31,6 +31,7 @@
             color: var(--text);
             overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
         }
         
         /* Градиентный фон */
@@ -88,7 +89,7 @@
         
         /* Контейнер */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
@@ -98,7 +99,7 @@
         /* Заголовок с зеркальным эффектом */
         .hero {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             position: relative;
         }
         
@@ -140,7 +141,7 @@
         
         /* Секция с квартирами */
         .apartments-section {
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
         
         .apartments-grid {
@@ -238,9 +239,572 @@
             color: var(--dark);
         }
         
-        /* Секция контактов */
+        /* Блок сотрудников */
+        .employees-section {
+            margin-bottom: 2rem;
+        }
+        
+        .employees-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .employees-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .employee-card {
+            background: var(--glass);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: auto;
+        }
+        
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 204, 0.1));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        
+        .employee-card:hover::before {
+            opacity: 1;
+        }
+        
+        .employee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .employee-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .employee-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .employee-info {
+            position: relative;
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+        
+        .employee-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .employee-position {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Теги сотрудника */
+        .employee-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .employee-tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .employee-card:hover .employee-tag {
+            background: var(--primary);
+            color: var(--dark);
+        }
+        
+        /* Лента Premium */
+        .premium-ribbon {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 3px 10px rgba(0, 255, 136, 0.3);
+            z-index: 3;
+        }
+        
+        .expert-ribbon {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: var(--dark);
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 3px 10px rgba(0, 255, 204, 0.3);
+            z-index: 3;
+        }
+        
+        /* Биография сотрудника */
+        .employee-bio {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 0 1rem;
+            margin-top: 1rem;
+        }
+        
+        .employee-card:hover .employee-bio,
+        .employee-card.active .employee-bio {
+            max-height: 200px;
+            padding: 1rem;
+        }
+        
+        .employee-bio h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        /* Блок процесса аренды */
+        .rental-process-section {
+            margin-bottom: 2rem;
+            position: relative;
+            padding: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .rental-process-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .rental-process-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .rental-process-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Анимированный фон для блока процесса */
+        .rental-process-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse 8s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        .rental-process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .rental-step {
+            background: var(--glass);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .rental-step.active {
+            opacity: 1;
+            transform: translateY(0);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        .rental-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .rental-step.active::before {
+            transform: scaleX(1);
+        }
+        
+        .rental-step-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rental-step.active .rental-step-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .rental-step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 2;
+        }
+        
+        .rental-step.active .rental-step-number {
+            opacity: 1;
+            top: -10px;
+        }
+        
+        .rental-step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .rental-step-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Блок отзывов - НОВЫЙ КРЕАТИВНЫЙ ФОРМАТ */
+        .reviews-section {
+            margin-bottom: 2rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .reviews-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .reviews-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        /* Новый контейнер для отзывов */
+        .reviews-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        /* Обертка для слайдера */
+        .reviews-slider-wrapper {
+            position: relative;
+            width: 100%;
+            padding: 2rem 0;
+        }
+        
+        /* Слайдер */
+        .reviews-slider {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Карточка отзыва */
+        .review-card {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 500px;
+            background: var(--glass);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 255, 204, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        
+        .review-card:hover::before {
+            opacity: 1;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            flex-shrink: 0;
+        }
+        
+        .review-info {
+            flex: 1;
+        }
+        
+        .review-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+        
+        .review-telegram {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .review-rating {
+            display: flex;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-rating i {
+            color: var(--primary);
+            margin-right: 0.4rem;
+            font-size: 1.2rem;
+        }
+        
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-quote {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 3rem;
+            color: rgba(0, 255, 136, 0.15);
+            font-family: 'Georgia', serif;
+            z-index: 0;
+        }
+        
+        .review-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .review-tag.premium {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        /* Навигация для отзывов */
+        .reviews-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .review-arrow {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .review-arrow:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: scale(1.1);
+        }
+        
+        .review-arrow:active {
+            transform: scale(0.95);
+        }
+        
+        /* Индикаторы */
+        .review-indicators {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .review-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .review-indicator.active {
+            background: var(--primary);
+            width: 30px;
+            border-radius: 5px;
+        }
+        
+        /* Блок контактов */
         .contact-section {
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
         
         .contact-container {
@@ -495,7 +1059,94 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Кнопка "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.5);
+        }
+        
         /* Адаптивность */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .review-card {
+                max-width: 450px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .apartments-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .employees-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .rental-process-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .rental-step {
+                padding: 1.5rem;
+            }
+            
+            .rental-step-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .rental-step-title {
+                font-size: 1.1rem;
+            }
+            
+            .rental-step-desc {
+                font-size: 0.9rem;
+            }
+            
+            .review-card {
+                max-width: 400px;
+                padding: 1.5rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3rem;
@@ -507,6 +1158,267 @@
             
             .contact-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .employees-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rental-process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .rental-step {
+                padding: 1.2rem;
+            }
+            
+            .rental-step-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .rental-step-number {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+            
+            .rental-step-title {
+                font-size: 1rem;
+            }
+            
+            .rental-step-desc {
+                font-size: 0.85rem;
+            }
+            
+            /* Отзывы для мобильной версии */
+            .reviews-slider {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .review-card {
+                max-width: 100%;
+                margin: 0 0 1.5rem 0;
+                width: 100%;
+            }
+            
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .review-avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .review-name {
+                font-size: 1.2rem;
+            }
+            
+            .review-telegram {
+                font-size: 0.9rem;
+            }
+            
+            .review-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+            
+            .review-quote {
+                font-size: 2rem;
+            }
+            
+            .review-tags {
+                gap: 0.4rem;
+            }
+            
+            .review-tag {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .reviews-nav {
+                gap: 1rem;
+            }
+            
+            .review-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .apartment-card {
+                border-radius: 15px;
+            }
+            
+            .apartment-content {
+                padding: 1.2rem;
+            }
+            
+            .apartment-title {
+                font-size: 1.3rem;
+            }
+            
+            .employee-card {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+            
+            .employee-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .employee-name {
+                font-size: 1.3rem;
+            }
+            
+            .employee-position {
+                font-size: 0.9rem;
+            }
+            
+            .rental-process-section {
+                margin-bottom: 1.5rem;
+                padding: 1.5rem 0;
+            }
+            
+            .rental-process-title {
+                font-size: 2rem;
+            }
+            
+            .rental-process-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .rental-process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rental-step {
+                margin-bottom: 1.5rem;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+            
+            .rental-step-title {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .rental-step-desc {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+            
+            .reviews-section {
+                margin-bottom: 1.5rem;
+                padding: 1.5rem 0;
+            }
+            
+            .reviews-title {
+                font-size: 2rem;
+            }
+            
+            .reviews-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .review-card {
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1rem;
+            }
+            
+            .review-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .review-name {
+                font-size: 1.1rem;
+            }
+            
+            .review-text {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .review-quote {
+                font-size: 1.8rem;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .contact-container {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .contact-title {
+                font-size: 2rem;
+            }
+            
+            .contact-item {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .popup-content {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .popup h3 {
+                font-size: 1.5rem;
+            }
+            
+            .popup-contact {
+                padding: 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .review-indicator {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .review-indicator.active {
+                width: 24px;
             }
         }
     </style>
@@ -685,6 +1597,400 @@
             </div>
         </section>
         
+        <!-- Блок лучших сотрудников -->
+        <section class="employees-section">
+            <h2 class="employees-title">Лучшие сотрудники месяца</h2>
+            <p class="employees-subtitle">Наша команда - наш главный актив</p>
+            
+            <div class="employees-grid">
+                <div class="employee-card">
+                    <div class="premium-ribbon">Premium</div>
+                    <div class="employee-avatar">
+                        <img src="https://via.placeholder.com/150" alt="Сотрудник">
+                    </div>
+                    <div class="employee-info">
+                        <h3 class="employee-name">Азиз Каримов</h3>
+                        <p class="employee-position">Старший риелтор</p>
+                        <div class="employee-tags">
+                            <span class="employee-tag">Оперативный</span>
+                            <span class="employee-tag">На связи всегда</span>
+                        </div>
+                    </div>
+                    <div class="employee-bio">
+                        <h4>О сотруднике</h4>
+                        <p>Опыт работы в недвижимости более 8 лет. Специалист по премиальным объектам в центре Ташкента. Помог более 150 клиентам найти дом их мечты.</p>
+                    </div>
+                </div>
+                
+                <div class="employee-card">
+                    <div class="expert-ribbon">Эксперт</div>
+                    <div class="employee-avatar">
+                        <img src="https://via.placeholder.com/150" alt="Сотрудник">
+                    </div>
+                    <div class="employee-info">
+                        <h3 class="employee-name">Малика Абдуллаева</h3>
+                        <p class="employee-position">Ведущий специалист</p>
+                        <div class="employee-tags">
+                            <span class="employee-tag">Эксперт</span>
+                            <span class="employee-tag">Внимательная</span>
+                        </div>
+                    </div>
+                    <div class="employee-bio">
+                        <h4>О сотруднике</h4>
+                        <p>Эксперт по новостройкам и инвестиционным объектам. Имеет сертификаты от ведущих застройщиков. За прошлый месяц закрыла 25 сделок.</p>
+                    </div>
+                </div>
+                
+                <div class="employee-card">
+                    <div class="employee-avatar">
+                        <img src="https://via.placeholder.com/150" alt="Сотрудник">
+                    </div>
+                    <div class="employee-info">
+                        <h3 class="employee-name">Бахром Турсунов</h3>
+                        <p class="employee-position">Менеджер по продажам</p>
+                        <div class="employee-tags">
+                            <span class="employee-tag">Амбициозный</span>
+                            <span class="employee-tag">Дружелюбный</span>
+                        </div>
+                    </div>
+                    <div class="employee-bio">
+                        <h4>О сотруднике</h4>
+                        <p>Молодой и амбициозный специалист. Быстро находит подход к клиентам. Специализируется на аренде и краткосрочных сделках.</p>
+                    </div>
+                </div>
+                
+                <div class="employee-card">
+                    <div class="premium-ribbon">Premium</div>
+                    <div class="employee-avatar">
+                        <img src="https://via.placeholder.com/150" alt="Сотрудник">
+                    </div>
+                    <div class="employee-info">
+                        <h3 class="employee-name">Севинч Рахимова</h3>
+                        <p class="employee-position">Юрисконсульт</p>
+                        <div class="employee-tags">
+                            <span class="employee-tag">Профессионал</span>
+                            <span class="employee-tag">Внимательный к деталям</span>
+                        </div>
+                    </div>
+                    <div class="employee-bio">
+                        <h4>О сотруднике</h4>
+                        <p>Юрист с 10-летним стажем работы в сфере недвижимости. Занимается проверкой документов и сопровождением сделок.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Блок процесса аренды -->
+        <section class="rental-process-section">
+            <div class="rental-process-bg"></div>
+            <h2 class="rental-process-title">Как мы работаем</h2>
+            <p class="rental-process-subtitle">Наш процесс работы от начала до конца</p>
+            
+            <div class="rental-process-container">
+                <div class="rental-process-grid">
+                    <div class="rental-step" data-step="1">
+                        <div class="rental-step-number">1</div>
+                        <div class="rental-step-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="rental-step-title">Первая связь</h3>
+                        <p class="rental-step-desc">
+                            Вы оставляете заявку, и наш специалист связывается с вами в течение 15 минут
+                        </p>
+                    </div>
+                    
+                    <div class="rental-step" data-step="2">
+                        <div class="rental-step-number">2</div>
+                        <div class="rental-step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="rental-step-title">Подбор вариантов</h3>
+                        <p class="rental-step-desc">
+                            Мы подбираем лучшие варианты, соответствующие вашим требованиям
+                        </p>
+                    </div>
+                    
+                    <div class="rental-step" data-step="3">
+                        <div class="rental-step-number">3</div>
+                        <div class="rental-step-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="rental-step-title">Оформление документов</h3>
+                        <p class="rental-step-desc">
+                            Помогаем с оформлением документов и заключением договора
+                        </p>
+                    </div>
+                    
+                    <div class="rental-step" data-step="4">
+                        <div class="rental-step-number">4</div>
+                        <div class="rental-step-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3 class="rental-step-title">Передача ключей</h3>
+                        <p class="rental-step-desc">
+                            Вы получаете ключи от новой квартиры, и мы остаемся на связи
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Блок отзывов - НОВЫЙ КРЕАТИВНЫЙ ФОРМАТ -->
+        <section class="reviews-section">
+            <h2 class="reviews-title">Отзывы наших клиентов</h2>
+            <p class="reviews-subtitle">Что говорят о нас люди</p>
+            
+            <div class="reviews-container">
+                <div class="reviews-slider-wrapper">
+                    <div class="reviews-slider" id="reviewsSlider">
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">Д</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Дилноза Маматова</h3>
+                                    <p class="review-telegram">@dilnoza_2024</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Огромное спасибо команде Comfort Home! Помогли подобрать идеальную квартиру в Мирабадском районе. Все прошло быстро и без нервов. Особенно хочу отметить Азиза - настоящий профессионал своего дела!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Консультация</span>
+                                <span class="review-tag">Покупка</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">Ж</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Жамшид Рахимов</h3>
+                                    <p class="review-telegram">@jamshid_tash</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Искал квартиру для аренды на долгий срок. Малика подобрала несколько вариантов, все соответствовали моим требованиям. В итоге остановился на квартире в Toshkent City Gardens. Очень доволен сервисом!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Аренда</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">Г</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Гульшода Алиева</h3>
+                                    <p class="review-telegram">@guli_flowers</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Покупала квартиру впервые, поэтому было немного страшно. Но Бахром все объяснил, помог с документами. Теперь я счастливая обладательница квартиры в новом ЖК! Рекомендую Comfort Home всем друзьям!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Консультация</span>
+                                <span class="review-tag">Покупка</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">С</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Сардор Усманов</h3>
+                                    <p class="review-telegram">@sardor_uzb</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Обращался в несколько агентств, но только в Comfort Home нашли то, что я искал. Профессиональный подход, внимательность к деталям. Покупка квартиры прошла гладко, без неожиданностей.
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag premium">Постоянный клиент</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">К</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Камола Абдухаликова</h3>
+                                    <p class="review-telegram">@kamola_style</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Спасибо за помощь в продаже моей старой квартиры! Все сделали быстро, нашли покупателя за неделю. Цена устроила, документы оформили без проблем. Отличная команда профессионалов!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Продажа</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">Р</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Рустам Мирзоев</h3>
+                                    <p class="review-telegram">@rustam_mirzo</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Хотел бы выразить благодарность Шерзоду за помощь в получении ипотеки. Благодаря ему я получил очень выгодные условия и теперь стал счастливым владельцем квартиры в новом ЖК!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Ипотека</span>
+                                <span class="review-tag">Покупка</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">Н</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Нодира Абдуллаева</h3>
+                                    <p class="review-telegram">@nodi_abdulla</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Очень довольна работой с Дилнозой! Она помогла продать мою старую квартиру и подобрать новую. Все документы были оформлены безупречно. Рекомендую!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Продажа</span>
+                                <span class="review-tag">Покупка</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">А</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Алишер Каримов</h3>
+                                    <p class="review-telegram">@alisher_karim</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Искал квартиру для инвестиций. Команда Comfort Home подобрала несколько вариантов с хорошим потенциалом роста цены. Уже через полгода стоимость квартиры увеличилась на 15%! Отличное вложение!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Инвестиции</span>
+                                <span class="review-tag premium">Постоянный клиент</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-quote">"</div>
+                            <div class="review-header">
+                                <div class="review-avatar">М</div>
+                                <div class="review-info">
+                                    <h3 class="review-name">Мухаммад Исмаилов</h3>
+                                    <p class="review-telegram">@m_ismailov</p>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">
+                                Снимал квартиру через Comfort Home на год. Все прошло гладко, никаких скрытых платежей. Когда срок аренды закончился, агент помог мне найти новую квартиру. Спасибо за надежность!
+                            </p>
+                            <div class="review-tags">
+                                <span class="review-tag">Аренда</span>
+                                <span class="review-tag premium">Постоянный клиент</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reviews-nav">
+                    <div class="review-arrow" id="prevReview">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    
+                    <div class="review-indicators" id="reviewIndicators">
+                        <div class="review-indicator active" data-index="0"></div>
+                        <div class="review-indicator" data-index="1"></div>
+                        <div class="review-indicator" data-index="2"></div>
+                        <div class="review-indicator" data-index="3"></div>
+                        <div class="review-indicator" data-index="4"></div>
+                        <div class="review-indicator" data-index="5"></div>
+                        <div class="review-indicator" data-index="6"></div>
+                        <div class="review-indicator" data-index="7"></div>
+                        <div class="review-indicator" data-index="8"></div>
+                    </div>
+                    
+                    <div class="review-arrow" id="nextReview">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Секция контактов -->
         <section class="contact-section">
             <div class="contact-container">
@@ -747,6 +2053,11 @@
         </footer>
     </div>
     
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
     <!-- Попап с контактами -->
     <div class="popup" id="contactPopup">
         <div class="popup-content">
@@ -789,6 +2100,24 @@
             }
         });
         
+        // Кнопка "Наверх"
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
         // Анимация появления карточек
         const observerOptions = {
             threshold: 0.1,
@@ -806,11 +2135,382 @@
             });
         }, observerOptions);
         
-        document.querySelectorAll('.apartment-card, .contact-item').forEach(el => {
+        document.querySelectorAll('.apartment-card, .contact-item, .employee-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(el);
+        });
+        
+        // Карточки сотрудников - раскрытие биографии при клике
+        const employeeCards = document.querySelectorAll('.employee-card');
+        
+        employeeCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Закрываем все остальные карточки
+                employeeCards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('active');
+                    }
+                });
+                
+                // Открываем/закрываем текущую карточку
+                card.classList.toggle('active');
+            });
+        });
+        
+        // НОВЫЙ СЛАЙДЕР ОТЗЫВОВ
+        const reviewsSlider = document.getElementById('reviewsSlider');
+        const reviewCards = document.querySelectorAll('.review-card');
+        const prevReviewBtn = document.getElementById('prevReview');
+        const nextReviewBtn = document.getElementById('nextReview');
+        const reviewIndicators = document.querySelectorAll('.review-indicator');
+        
+        let currentIndex = 0;
+        const cardWidth = 520; // Ширина карточки + отступы
+        let isAnimating = false;
+        let autoPlayInterval;
+        const isMobile = window.innerWidth <= 768;
+        
+        // Функция обновления слайдера
+        function updateSlider() {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            // Вычисляем смещение
+            const offset = -currentIndex * cardWidth;
+            
+            // Применяем трансформацию
+            if (isMobile) {
+                // Для мобильной версии - вертикальное смещение
+                const mobileOffset = -currentIndex * (reviewCards[0].offsetHeight + 20);
+                reviewsSlider.style.transform = `translateY(${mobileOffset}px)`;
+            } else {
+                // Для десктопа - горизонтальное смещение
+                reviewsSlider.style.transform = `translateX(${offset}px)`;
+            }
+            
+            // Обновляем индикаторы
+            reviewIndicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Завершаем анимацию
+            setTimeout(() => {
+                isAnimating = false;
+            }, 600);
+        }
+        
+        // Функция перехода к следующему слайду
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % reviewCards.length;
+            updateSlider();
+        }
+        
+        // Функция перехода к предыдущему слайду
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + reviewCards.length) % reviewCards.length;
+            updateSlider();
+        }
+        
+        // Обработчики для кнопок
+        nextReviewBtn.addEventListener('click', () => {
+            clearInterval(autoPlayInterval);
+            nextSlide();
+            startAutoPlay();
+        });
+        
+        prevReviewBtn.addEventListener('click', () => {
+            clearInterval(autoPlayInterval);
+            prevSlide();
+            startAutoPlay();
+        });
+        
+        // Обработчики для индикаторов
+        reviewIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                clearInterval(autoPlayInterval);
+                currentIndex = index;
+                updateSlider();
+                startAutoPlay();
+            });
+        });
+        
+        // Автоматическое воспроизведение
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Инициализация
+        updateSlider();
+        startAutoPlay();
+        
+        // Свайп для мобильных устройств
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        
+        reviewsSlider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            clearInterval(autoPlayInterval);
+        }, { passive: true });
+        
+        reviewsSlider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (isMobile) {
+                // Вертикальный свайп для мобильной версии
+                const diffY = touchStartY - touchEndY;
+                if (diffY > 50) {
+                    nextSlide();
+                } else if (diffY < -50) {
+                    prevSlide();
+                }
+            } else {
+                // Горизонтальный свайп для десктопа
+                const diffX = touchStartX - touchEndX;
+                if (diffX > 50) {
+                    nextSlide();
+                } else if (diffX < -50) {
+                    prevSlide();
+                }
+            }
+        }
+        
+        // Анимация процесса аренды
+        const rentalSteps = document.querySelectorAll('.rental-step');
+        
+        const rentalProcessObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateRentalProcess();
+                rentalProcessObserver.unobserve(entries[0].target);
+            }
+        }, { threshold: 0.3 });
+        
+        rentalProcessObserver.observe(document.querySelector('.rental-process-section'));
+        
+        function animateRentalProcess() {
+            // Появление шагов с задержкой
+            rentalSteps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add('active');
+                    
+                    // Создаем частицы для активного шага
+                    createStepParticles(step);
+                    
+                    // Особая анимация для последнего шага
+                    if (index === rentalSteps.length - 1) {
+                        createCelebrationParticles(step.querySelector('.rental-step-icon'));
+                    }
+                }, 300 + (index * 400));
+            });
+        }
+        
+        function createStepParticles(step) {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'rental-step-particles';
+            step.appendChild(particlesContainer);
+            
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'rental-step-particle';
+                
+                // Случайное положение вокруг шага
+                const angle = (i / particleCount) * Math.PI * 2;
+                const distance = 40 + Math.random() * 20;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance - 30;
+                
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.animationDelay = `${i * 0.1}s`;
+                
+                particlesContainer.appendChild(particle);
+                
+                // Удаляем частицу после анимации
+                setTimeout(() => {
+                    particle.remove();
+                }, 2000);
+            }
+        }
+        
+        // Пузырьки по всему экрану
+        function createBubble(x, y) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            // Случайный размер
+            const size = Math.random() * 8 + 3;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Позиционирование
+            bubble.style.left = `${x}px`;
+            bubble.style.top = `${y}px`;
+            
+            // Случайное направление
+            const tx = (Math.random() - 0.5) * 60;
+            const ty = -Math.random() * 30 - 10;
+            bubble.style.setProperty('--tx', `${tx}px`);
+            bubble.style.setProperty('--ty', `${ty}px`);
+            
+            // Добавляем в body
+            document.body.appendChild(bubble);
+            
+            // Удаляем после анимации
+            setTimeout(() => {
+                bubble.remove();
+            }, 2000);
+        }
+        
+        // Обработчик движения мыши для создания пузырьков
+        document.addEventListener('mousemove', (e) => {
+            // Создаем пузырьки с меньшей вероятностью
+            if (Math.random() > 0.95) {
+                createBubble(e.clientX, e.clientY);
+            }
+        });
+        
+        // Обработчики для мобильных устройств
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            createBubble(touch.clientX, touch.clientY);
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            if (Math.random() > 0.85) {
+                createBubble(touch.clientX, touch.clientY);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            // Создаем меньше пузырьков при клике
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const offsetX = (Math.random() - 0.5) * 30;
+                    const offsetY = (Math.random() - 0.5) * 30;
+                    createBubble(e.clientX + offsetX, e.clientY + offsetY);
+                }, i * 50);
+            }
+        });
+        
+        // Интерактивные частицы при наведении на карточки
+        document.querySelectorAll('.apartment-card, .employee-card, .review-card, .contact-item, .rental-step').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                // Создаем частицы при наведении
+                createParticles(e, card);
+            });
+        });
+        
+        function createParticles(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Создаем меньше частиц
+            const particleCount = Math.floor(Math.random() * 3) + 2;
+            
+            for (let i = 0; i < particleCount; i++) {
+                createParticle(x, y, card);
+            }
+        }
+        
+        function createParticle(x, y, container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Случайный размер
+            const size = Math.random() * 3 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Позиционирование
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            // Стили
+            particle.style.position = 'absolute';
+            particle.style.borderRadius = '50%';
+            particle.style.background = 'rgba(0, 255, 136, 0.5)';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '10';
+            
+            // Анимация
+            particle.style.animation = 'particleFloat 1s ease-out forwards';
+            
+            // Добавляем в контейнер
+            container.appendChild(particle);
+            
+            // Удаляем после анимации
+            setTimeout(() => {
+                particle.remove();
+            }, 1000);
+        }
+        
+        // Стили для анимации частиц
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translate(0, 0);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translate(var(--tx, 0), var(--ty, -50px));
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Устанавливаем случайное направление для каждой частицы
+        document.addEventListener('animationstart', (e) => {
+            if (e.target.classList.contains('particle')) {
+                const tx = (Math.random() - 0.5) * 60;
+                const ty = -Math.random() * 30 - 10;
+                e.target.style.setProperty('--tx', `${tx}px`);
+                e.target.style.setProperty('--ty', `${ty}px`);
+            }
+        }, true);
+        
+        function createCelebrationParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Создаем частицы для празднования
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const angle = (i / 20) * Math.PI * 2;
+                    const distance = 50 + Math.random() * 50;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    
+                    createParticle(x - rect.left, y - rect.top, element.parentElement);
+                }, i * 50);
+            }
+        }
+        
+        // Адаптация при изменении размера окна
+        window.addEventListener('resize', () => {
+            const newIsMobile = window.innerWidth <= 768;
+            
+            if (newIsMobile !== isMobile) {
+                // При изменении ориентации пересчитываем позицию
+                updateSlider();
+            }
         });
     </script>
 </body>
