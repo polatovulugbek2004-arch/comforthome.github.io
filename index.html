@@ -239,182 +239,6 @@
             color: var(--dark);
         }
         
-        /* Блок сотрудников */
-        .employees-section {
-            margin-bottom: 2rem;
-        }
-        
-        .employees-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .employees-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .employees-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .employee-card {
-            background: var(--glass);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            height: auto;
-        }
-        
-        .employee-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 204, 0.1));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 0;
-        }
-        
-        .employee-card:hover::before {
-            opacity: 1;
-        }
-        
-        .employee-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.2);
-        }
-        
-        .employee-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 1.5rem;
-            border: 3px solid rgba(0, 255, 136, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .employee-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .employee-info {
-            position: relative;
-            z-index: 1;
-            transition: all 0.5s ease;
-        }
-        
-        .employee-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .employee-position {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-        
-        /* Теги сотрудника */
-        .employee-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .employee-tag {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .employee-card:hover .employee-tag {
-            background: var(--primary);
-            color: var(--dark);
-        }
-        
-        /* Лента Premium */
-        .premium-ribbon {
-            position: absolute;
-            top: 15px;
-            right: -30px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            padding: 5px 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transform: rotate(45deg);
-            box-shadow: 0 3px 10px rgba(0, 255, 136, 0.3);
-            z-index: 3;
-        }
-        
-        .expert-ribbon {
-            position: absolute;
-            top: 15px;
-            right: -30px;
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: var(--dark);
-            padding: 5px 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transform: rotate(45deg);
-            box-shadow: 0 3px 10px rgba(0, 255, 204, 0.3);
-            z-index: 3;
-        }
-        
-        /* Биография сотрудника */
-        .employee-bio {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, padding 0.5s ease;
-            text-align: left;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            padding: 0 1rem;
-            margin-top: 1rem;
-        }
-        
-        .employee-card:hover .employee-bio,
-        .employee-card.active .employee-bio {
-            max-height: 200px;
-            padding: 1rem;
-        }
-        
-        .employee-bio h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-        
         /* Блок процесса аренды */
         .rental-process-section {
             margin-bottom: 2rem;
@@ -1111,10 +935,6 @@
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             }
             
-            .employees-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            
             .contact-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
@@ -1157,10 +977,6 @@
             }
             
             .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .employees-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -1278,24 +1094,6 @@
             
             .apartment-title {
                 font-size: 1.3rem;
-            }
-            
-            .employee-card {
-                padding: 1.5rem;
-                border-radius: 15px;
-            }
-            
-            .employee-avatar {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .employee-name {
-                font-size: 1.3rem;
-            }
-            
-            .employee-position {
-                font-size: 0.9rem;
             }
             
             .rental-process-section {
@@ -1592,89 +1390,6 @@
                                 <span>2500$</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Блок лучших сотрудников -->
-        <section class="employees-section">
-            <h2 class="employees-title">Лучшие сотрудники месяца</h2>
-            <p class="employees-subtitle">Наша команда - наш главный актив</p>
-            
-            <div class="employees-grid">
-                <div class="employee-card">
-                    <div class="premium-ribbon">Premium</div>
-                    <div class="employee-avatar">
-                        <img src="images/icon_whiteblackset.png" alt="Сотрудник">
-                    </div>
-                    <div class="employee-info">
-                        <h3 class="employee-name">Шохжахон Сотволдиев</h3>
-                        <p class="employee-position">Старший риелтор</p>
-                        <div class="employee-tags">
-                            <span class="employee-tag">Оперативный</span>
-                            <span class="employee-tag">На связи всегда</span>
-                        </div>
-                    </div>
-                    <div class="employee-bio">
-                        <h4>О сотруднике</h4>
-                        <p>Опыт работы в недвижимости более 8 лет. Специалист по премиальным объектам в центре Ташкента. Помог более 150 клиентам найти дом их мечты.</p>
-                    </div>
-                </div>
-                
-                <div class="employee-card">
-                    <div class="expert-ribbon">Эксперт</div>
-                    <div class="employee-avatar">
-                        <img src="images/icon_whiteblackset.png" alt="Сотрудник">
-                    </div>
-                    <div class="employee-info">
-                        <h3 class="employee-name">Садаф Саидова</h3>
-                        <p class="employee-position">Ведущий специалист</p>
-                        <div class="employee-tags">
-                            <span class="employee-tag">Эксперт</span>
-                            <span class="employee-tag">Внимательная</span>
-                        </div>
-                    </div>
-                    <div class="employee-bio">
-                        <h4>О сотруднике</h4>
-                        <p>Эксперт по новостройкам и инвестиционным объектам. Имеет сертификаты от ведущих застройщиков. За прошлый месяц закрыла 25 сделок.</p>
-                    </div>
-                </div>
-                
-                <div class="employee-card">
-                    <div class="employee-avatar">
-                        <img src="images/icon_whiteblackset.png" alt="Сотрудник">
-                    </div>
-                    <div class="employee-info">
-                        <h3 class="employee-name">Бегзод Давлатов</h3>
-                        <p class="employee-position">Риэлтор</p>
-                        <div class="employee-tags">
-                            <span class="employee-tag">Амбициозный</span>
-                            <span class="employee-tag">Ответственный</span>
-                        </div>
-                    </div>
-                    <div class="employee-bio">
-                        <h4>О сотруднике</h4>
-                        <p>Молодой и амбициозный специалист. Быстро находит подход к клиентам. Специализируется на аренде и краткосрочных сделках.</p>
-                    </div>
-                </div>
-                
-                <div class="employee-card">
-                    <div class="premium-ribbon">Premium</div>
-                    <div class="employee-avatar">
-                        <img src="images/icon_whiteblackset.png" alt="Сотрудник">
-                    </div>
-                    <div class="employee-info">
-                        <h3 class="employee-name">Севинч Бахтиёрова</h3>
-                        <p class="employee-position">Риэлтор</p>
-                        <div class="employee-tags">
-                            <span class="employee-tag">Профессионал</span>
-                            <span class="employee-tag">Внимательный к деталям</span>
-                        </div>
-                    </div>
-                    <div class="employee-bio">
-                        <h4>О сотруднике</h4>
-                        <p>Юрист с 10-летним стажем работы в сфере недвижимости. Занимается проверкой документов и сопровождением сделок.</p>
                     </div>
                 </div>
             </div>
@@ -2135,28 +1850,11 @@
             });
         }, observerOptions);
         
-        document.querySelectorAll('.apartment-card, .contact-item, .employee-card').forEach(el => {
+        document.querySelectorAll('.apartment-card, .contact-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(el);
-        });
-        
-        // Карточки сотрудников - раскрытие биографии при клике
-        const employeeCards = document.querySelectorAll('.employee-card');
-        
-        employeeCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Закрываем все остальные карточки
-                employeeCards.forEach(otherCard => {
-                    if (otherCard !== card) {
-                        otherCard.classList.remove('active');
-                    }
-                });
-                
-                // Открываем/закрываем текущую карточку
-                card.classList.toggle('active');
-            });
         });
         
         // НОВЫЙ СЛАЙДЕР ОТЗЫВОВ
@@ -2407,7 +2105,7 @@
         });
         
         // Интерактивные частицы при наведении на карточки
-        document.querySelectorAll('.apartment-card, .employee-card, .review-card, .contact-item, .rental-step').forEach(card => {
+        document.querySelectorAll('.apartment-card, .review-card, .contact-item, .rental-step').forEach(card => {
             card.addEventListener('mouseenter', (e) => {
                 // Создаем частицы при наведении
                 createParticles(e, card);
